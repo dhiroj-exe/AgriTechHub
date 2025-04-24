@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - AgriTech Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Page Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-icon"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i class="fas fa-leaf text-3xl text-green-500 mr-2"></i>
+                        <span class="text-2xl font-bold text-gray-800">AgriTech<span class="text-green-500">Hub</span></span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Home</a>
+                    <a href="features.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Features</a>
+                    <a href="crops.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Crops</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Marketplace</a>
+                    <a href="weather.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Weather</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Community</a>
+                    <a href="about.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">About</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Contact</a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="login.html" class="px-4 py-2 text-gray-700 hover:text-green-500 font-medium transition duration-300">Login</a>
+                    <a href="signup.html" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Sign Up</a>
+                    <a href="cart.html" class="relative text-gray-700 hover:text-green-500 transition duration-300">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <a href="cart.html" class="relative text-gray-700 hover:text-green-500 transition duration-300 mr-4">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="mobile-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-green-500 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Home</a>
+                    <a href="features.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Features</a>
+                    <a href="crops.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Crops</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Marketplace</a>
+                    <a href="weather.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Weather</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Community</a>
+                    <a href="about.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">About</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Contact</a>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="login.html" class="px-4 py-2 text-gray-700 hover:text-green-500 font-medium transition duration-300">Login</a>
+                        <a href="signup.html" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header py-20 md:py-28 mt-16 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4" data-aos="fade-up">About <span class="text-green-400">AgriTech Hub</span></h1>
+            <p class="text-xl max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Learn about our mission to revolutionize agriculture with technology and empower farmers worldwide.</p>
+        </div>
+    </header>
+
+    <!-- Our Story Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Our <span class="text-gradient">Story</span></h2>
+                    <p class="text-gray-600 mb-4">AgriTech Hub was founded in 2025 with a simple yet powerful vision: to bridge the gap between traditional farming practices and modern technology, making agriculture more efficient, sustainable, and profitable for farmers of all sizes.</p>
+                    <p class="text-gray-600 mb-4">Our journey began when a group of agricultural experts, technologists, and farmers came together to address the challenges faced by the farming community. We recognized that while technology was transforming industries worldwide, agriculture often lagged behind, especially in developing regions.</p>
+                    <p class="text-gray-600">Today, AgriTech Hub serves thousands of farmers across 50 countries, providing them with tools, resources, and a marketplace to thrive in the modern agricultural landscape. Our platform continues to evolve based on farmer feedback and technological advancements, staying true to our mission of empowering farmers through technology.</p>
+                </div>
+                <div class="relative" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Farmers in field" class="rounded-xl shadow-lg w-full">
+                    <div class="absolute -bottom-6 -left-6 bg-green-500 text-white p-4 rounded-lg shadow-lg hidden md:block">
+                        <p class="text-lg font-bold">Founded in 2025</p>
+                        <p>Serving farmers in 50+ countries</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Mission Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Our <span class="text-gradient">Mission</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">We're on a mission to transform agriculture through technology and create a more sustainable future for farming communities worldwide.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-seedling text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Empower Farmers</h3>
+                    <p class="text-gray-600">Provide farmers with the tools, knowledge, and resources they need to make informed decisions and maximize their productivity and profitability.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-globe-americas text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Promote Sustainability</h3>
+                    <p class="text-gray-600">Encourage sustainable farming practices that preserve natural resources, reduce environmental impact, and ensure long-term agricultural viability.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-handshake text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Bridge the Gap</h3>
+                    <p class="text-gray-600">Connect farmers directly with consumers, suppliers, and experts, eliminating middlemen and creating a more efficient agricultural ecosystem.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Our <span class="text-gradient">Team</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Meet the passionate individuals behind AgriTech Hub who are dedicated to transforming agriculture.</p>
+            </div>
+            
+            <div class="flex justify-center">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl">
+                    <!-- Team Member 1 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="100">
+                        <div class="h-64 overflow-hidden">
+                            <img src="dhiroj.jpeg" alt="Dhiroj Nayak" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Dhiroj Nayak</h3>
+                            <p class="text-green-600 font-medium mb-3">AI & Backend Developer</p>
+                            <p class="text-gray-600 text-sm mb-4">Agricultural economist with 15+ years of experience in farming technology and innovation.</p>
+                            <div class="flex justify-center space-x-4">
+                                <a href="https://www.linkedin.com/in/dhiroj-nayak?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-gray-400 hover:text-blue-500 transition duration-300">
+                                    <i class="fab fa-linkedin text-xl"></i>
+                                </a>
+                                <a href="https://www.instagram.com/dhiroj.exe?igsh=emp6c2x6YXowNDlp" class="text-gray-400 hover:text-blue-400 transition duration-300">
+                                    <i class="fab fa-instagram text-xl"></i>
+                                </a>
+                                <a href="dhirojnayak9@gmail.com" class="text-gray-400 hover:text-gray-700 transition duration-300">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Team Member 2 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up" data-aos-delay="200">
+                        <div class="h-64 overflow-hidden">
+                            <img src="aditya.jpeg" alt="Aditya Kumar Sahoo" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6 text-center">
+                            <h3 class="text-xl font-bold text-gray-800 mb-1">Aditya Kumar Sahoo</h3>
+                            <p class="text-green-600 font-medium mb-3">UI & Frontend Developer</p>
+                            <p class="text-gray-600 text-sm mb-4">Tech innovator specializing in AI and IoT solutions for agricultural applications.</p>
+                            <div class="flex justify-center space-x-4">
+                                <a href="https://www.linkedin.com/in/aditya-kumarsahoo?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="text-gray-400 hover:text-blue-500 transition duration-300">
+                                    <i class="fab fa-linkedin text-xl"></i>
+                                </a>
+                                <a href="https://www.instagram.com/adityacodepreneur?igsh=MThpeW91b3p6YWdxZQ==" class="text-gray-400 hover:text-blue-400 transition duration-300">
+                                    <i class="fab fa-instagram text-xl"></i>
+                                </a>
+                                <a href="kumarsahooaditya95@gmail.com" class="text-gray-400 hover:text-gray-700 transition duration-300">
+                                    <i class="fas fa-envelope text-xl"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Impact Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Our <span class="text-gradient">Impact</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">How AgriTech Hub is making a difference in the lives of farmers and agricultural communities.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="grid grid-cols-2 gap-6" data-aos="fade-right">
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                        <div class="text-4xl font-bold text-green-600 mb-2">10K+</div>
+                        <p class="text-gray-600">Farmers Supported</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                        <div class="text-4xl font-bold text-green-600 mb-2">50+</div>
+                        <p class="text-gray-600">Countries Reached</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                        <div class="text-4xl font-bold text-green-600 mb-2">30%</div>
+                        <p class="text-gray-600">Average Yield Increase</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center">
+                        <div class="text-4xl font-bold text-green-600 mb-2">₹5Cr+</div>
+                        <p class="text-gray-600">Marketplace Transactions</p>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Making Agriculture Sustainable</h3>
+                    <p class="text-gray-600 mb-4">At AgriTech Hub, we believe that technology can make agriculture more sustainable, profitable, and accessible. Our platform has helped thousands of farmers increase their yields, reduce resource usage, and connect directly with buyers.</p>
+                    <p class="text-gray-600 mb-6">Through our weather forecasting, crop management, and marketplace features, farmers have been able to make data-driven decisions that have resulted in an average 30% increase in crop yields and a 25% reduction in water usage.</p>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
+                            <span class="text-gray-700">Reduced water usage by 25% through smart irrigation recommendations</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
+                            <span class="text-gray-700">Decreased crop losses by 40% with early disease detection</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i>
+                            <span class="text-gray-700">Increased farmer income by 35% through direct marketplace access</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">What <span class="text-gradient">Farmers Say</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Hear from the farmers who have transformed their agricultural practices with AgriTech Hub.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Farmer" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Ramesh Yadav</h3>
+                            <p class="text-gray-600">Wheat Farmer, Uttar Pradesh</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"AgriTech Hub has completely changed how I farm. The weather forecasts are incredibly accurate, and I've been able to plan my planting and harvesting much better. My yield has increased by 40% in just one season!"</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Farmer" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Lakshmi Devi</h3>
+                            <p class="text-gray-600">Vegetable Grower, Karnataka</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"The marketplace feature has been a game-changer for me. I now sell my vegetables directly to consumers and restaurants, earning 30% more than I did when selling to middlemen. The platform is easy to use even for someone like me who isn't tech-savvy."</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Farmer" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Harpreet Singh</h3>
+                            <p class="text-gray-600">Rice Farmer, Punjab</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">"The crop management tools have helped me track the growth of my rice paddies and identify issues early. I was able to detect a disease outbreak before it spread, saving my entire crop. The community forum also connects me with other farmers facing similar challenges."</p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- CTA Section -->
+    <section class="py-16 cta-section text-white">
+        <div class="container mx-auto px-4 text-center" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Join the Agricultural Revolution</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">Be part of our mission to transform agriculture with technology. Sign up today and experience the future of farming.</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="signup.html" class="px-8 py-3 bg-white text-green-600 rounded-lg hover:bg-gray-100 transition duration-300 text-lg font-medium">Get Started Free</a>
+                <a href="contact.html" class="px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-green-600 transition duration-300 text-lg font-medium">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-leaf text-3xl text-green-500 mr-2"></i>
+                        <span class="text-2xl font-bold">AgriTech<span class="text-green-500">Hub</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your complete farming companion with all the tools and resources you need from seed to market.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="features.html" class="text-gray-400 hover:text-white transition duration-300">Features</a></li>
+                        <li><a href="marketplace.html" class="text-gray-400 hover:text-white transition duration-300">Marketplace</a></li>
+                        <li><a href="weather.html" class="text-gray-400 hover:text-white transition duration-300">Weather</a></li>
+                        <li><a href="community.html" class="text-gray-400 hover:text-white transition duration-300">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Crop Library</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Farming Guides</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Market Prices</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Government Schemes</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Expert Advice</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-green-500"></i>
+                            <span class="text-gray-400">123 Farming Road, Agri Valley, New Delhi, India</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-green-500"></i>
+                            <span class="text-gray-400">+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-green-500"></i>
+                            <span class="text-gray-400">info@agritechhub.com</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4">
+                        <h4 class="text-sm font-bold mb-2">Subscribe to our newsletter</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-gray-800">
+                            <button class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-r-lg transition duration-300">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 AgriTech Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>

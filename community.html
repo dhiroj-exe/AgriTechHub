@@ -1,0 +1,643 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="AgriTech Hub Community - Connect with farmers and agricultural experts">
+      <title>Community - AgriTech Hub</title>
+      <!-- Preconnect to external domains for faster loading -->
+      <link rel="preconnect" href="https://cdn.tailwindcss.com">
+      <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      
+      <!-- Tailwind CSS CDN -->
+      <script src="https://cdn.tailwindcss.com"></script>
+      
+      <!-- Font Awesome for icons -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+      
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+      
+      <!-- Custom CSS -->
+      <link rel="stylesheet" href="style.css">
+      
+      <style>
+          .page-header {
+              background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1531973576160-7125cd663d86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80');
+              background-size: cover;
+              background-position: center;
+          }
+          /* Loader styles for immediate display */
+          .loader {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              z-index: 9999;
+              transition: opacity 0.5s ease-out;
+          }
+          .loader-icon {
+              border: 5px solid #f3f3f3;
+              border-top: 5px solid #22c55e;
+              border-radius: 50%;
+              width: 50px;
+              height: 50px;
+              animation: spin 1s linear infinite;
+          }
+          @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+          }
+      </style>
+  </head>
+  <body class="bg-gray-50">
+      <!-- Page Loader -->
+      <div class="loader" id="loader">
+          <div class="loader-icon"></div>
+      </div>
+  
+      <!-- Navigation -->
+      <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
+          <div class="container mx-auto px-4 py-3">
+              <div class="flex justify-between items-center">
+                  <div class="flex items-center">
+                      <a href="index.html" class="flex items-center">
+                          <i class="fas fa-leaf text-3xl text-green-500 mr-2"></i>
+                          <span class="text-2xl font-bold text-gray-800">AgriTech<span class="text-green-500">Hub</span></span>
+                      </a>
+                  </div>
+                  
+                  <!-- Desktop Menu -->
+                  <div class="hidden md:flex space-x-6">
+                      <a href="index.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Home</a>
+                      <a href="features.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Features</a>
+                      <a href="crops.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Crops</a>
+                      <a href="marketplace.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Marketplace</a>
+                      <a href="weather.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Weather</a>
+                      <a href="community.html" class="text-green-500 font-medium transition duration-300">Community</a>
+                      <a href="about.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">About</a>
+                      <a href="contact.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Contact</a>
+                  </div>
+                  
+                  <div class="hidden md:flex items-center space-x-4">
+                      <a href="login.html" class="px-4 py-2 text-gray-700 hover:text-green-500 font-medium transition duration-300">Login</a>
+                      <a href="signup.html" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Sign Up</a>
+                      <a href="cart.html" class="relative text-gray-700 hover:text-green-500 transition duration-300">
+                          <i class="fas fa-shopping-cart text-xl"></i>
+                          <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                      </a>
+                  </div>
+                  
+                  <!-- Mobile Menu Button -->
+                  <div class="md:hidden flex items-center">
+                      <a href="cart.html" class="relative text-gray-700 hover:text-green-500 transition duration-300 mr-4">
+                          <i class="fas fa-shopping-cart text-xl"></i>
+                          <span id="mobile-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                      </a>
+                      <button id="mobile-menu-button" class="text-gray-700 hover:text-green-500 focus:outline-none">
+                          <i class="fas fa-bars text-2xl"></i>
+                      </button>
+                  </div>
+              </div>
+              
+              <!-- Mobile Menu -->
+              <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+                  <div class="flex flex-col space-y-4">
+                      <a href="index.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Home</a>
+                      <a href="features.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Features</a>
+                      <a href="crops.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Crops</a>
+                      <a href="marketplace.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Marketplace</a>
+                      <a href="weather.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Weather</a>
+                      <a href="community.html" class="text-green-500 font-medium transition duration-300">Community</a>
+                      <a href="about.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">About</a>
+                      <a href="contact.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Contact</a>
+                      <div class="flex space-x-4 pt-2">
+                          <a href="login.html" class="px-4 py-2 text-gray-700 hover:text-green-500 font-medium transition duration-300">Login</a>
+                          <a href="signup.html" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Sign Up</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </nav>
+  
+      <!-- Page Header -->
+      <header class="page-header py-24 mt-16">
+          <div class="container mx-auto px-4 text-center text-white">
+              <h1 class="text-4xl md:text-5xl font-bold mb-6">Farming Community</h1>
+              <p class="text-xl max-w-3xl mx-auto">Connect with fellow farmers, share knowledge, and learn from agricultural experts.</p>
+          </div>
+      </header>
+  
+      <!-- Community Overview Section -->
+      <section class="py-16 bg-white">
+          <div class="container mx-auto px-4">
+              <div class="text-center mb-16">
+                  <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Join Our <span class="text-gradient">Community</span></h2>
+                  <p class="text-xl text-gray-600 max-w-3xl mx-auto">Be part of a growing network of farmers, agricultural experts, and enthusiasts who share knowledge and support each other.</p>
+              </div>
+              
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <!-- Community Feature 1 -->
+                  <div class="feature-card bg-white p-6 rounded-xl shadow-md transition-all duration-300">
+                      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                          <i class="fas fa-comments text-2xl text-green-600"></i>
+                      </div>
+                      <h3 class="text-xl font-bold text-gray-800 mb-3">Discussion Forums</h3>
+                      <p class="text-gray-600 mb-4">Engage in discussions about farming techniques, crop management, and agricultural innovations with farmers from around the world.</p>
+                      <a href="#forums" class="text-green-600 hover:text-green-700 font-medium inline-flex items-center">
+                          Join discussions <i class="fas fa-arrow-right ml-2"></i>
+                      </a>
+                  </div>
+                  
+                  <!-- Community Feature 2 -->
+                  <div class="feature-card bg-white p-6 rounded-xl shadow-md transition-all duration-300">
+                      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                          <i class="fas fa-chalkboard-teacher text-2xl text-green-600"></i>
+                      </div>
+                      <h3 class="text-xl font-bold text-gray-800 mb-3">Expert Advice</h3>
+                      <p class="text-gray-600 mb-4">Get guidance from agricultural scientists, experienced farmers, and industry experts on various farming challenges.</p>
+                      <a href="#experts" class="text-green-600 hover:text-green-700 font-medium inline-flex items-center">
+                          Meet our experts <i class="fas fa-arrow-right ml-2"></i>
+                      </a>
+                  </div>
+                  
+                  <!-- Community Feature 3 -->
+                  <div class="feature-card bg-white p-6 rounded-xl shadow-md transition-all duration-300">
+                      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                          <i class="fas fa-calendar-alt text-2xl text-green-600"></i>
+                      </div>
+                      <h3 class="text-xl font-bold text-gray-800 mb-3">Events & Webinars</h3>
+                      <p class="text-gray-600 mb-4">Participate in virtual and in-person events, workshops, and webinars to enhance your farming knowledge and network.</p>
+                      <a href="#events" class="text-green-600 hover:text-green-700 font-medium inline-flex items-center">
+                          View upcoming events <i class="fas fa-arrow-right ml-2"></i>
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </section>
+  
+      <!-- Discussion Forums Section -->
+      <section id="forums" class="py-16 bg-gray-50">
+          <div class="container mx-auto px-4">
+              <div class="text-center mb-12">
+                  <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Discussion <span class="text-gradient">Forums</span></h2>
+                  <p class="text-xl text-gray-600 max-w-3xl mx-auto">Join conversations on various agricultural topics and share your experiences with the community.</p>
+              </div>
+              
+              <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                  <div class="p-6 border-b">
+                      <div class="flex justify-between items-center">
+                          <h3 class="text-xl font-bold text-gray-800">Popular Discussions</h3>
+                          <div class="flex space-x-2">
+                              <button class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">New Topic</button>
+                              <div class="relative">
+                                  <input type="text" placeholder="Search forums..." class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                  <button class="absolute right-3 top-2.5 text-gray-500 hover:text-gray-700">
+                                      <i class="fas fa-search"></i>
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- Forum Topics -->
+                  <div class="divide-y">
+                      <!-- Topic 1 -->
+                      <div class="p-6 hover:bg-gray-50 transition duration-300">
+                          <div class="flex items-start">
+                              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="User" class="w-12 h-12 rounded-full object-cover mr-4">
+                              <div class="flex-1">
+                                  <div class="flex justify-between items-start">
+                                      <h4 class="text-lg font-bold text-gray-800 hover:text-green-600 transition duration-300">Organic pest control methods for rice cultivation</h4>
+                                      <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Organic Farming</span>
+                                  </div>
+                                  <p class="text-gray-600 mt-2">I've been struggling with pests in my rice fields and want to avoid chemical pesticides. Has anyone tried neem oil or other organic solutions?</p>
+                                  <div class="flex justify-between items-center mt-4">
+                                      <div class="flex items-center text-sm text-gray-500">
+                                          <span class="font-medium text-gray-700 mr-2">Ramesh Yadav</span>
+                                          <span>Posted 2 days ago</span>
+                                      </div>
+                                      <div class="flex items-center space-x-4">
+                                          <span class="flex items-center text-gray-500">
+                                              <i class="far fa-comment mr-1"></i> 24 replies
+                                          </span>
+                                          <span class="flex items-center text-gray-500">
+                                              <i class="far fa-eye mr-1"></i> 156 views
+                                          </span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <!-- Topic 2 -->
+                      <div class="p-6 hover:bg-gray-50 transition duration-300">
+                          <div class="flex items-start">
+                              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="User" class="w-12 h-12 rounded-full object-cover mr-4">
+                              <div class="flex-1">
+                                  <div class="flex justify-between items-start">
+                                      <h4 class="text-lg font-bold text-gray-800 hover:text-green-600 transition duration-300">Best practices for drip irrigation in vegetable farming</h4>
+                                      <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Water Management</span>
+                                  </div>
+                                  <p class="text-gray-600 mt-2">I'm planning to install a drip irrigation system for my vegetable farm. Looking for advice on setup, maintenance, and water scheduling.</p>
+                                  <div class="flex justify-between items-center mt-4">
+                                      <div class="flex items-center text-sm text-gray-500">
+                                          <span class="font-medium text-gray-700 mr-2">Lakshmi Devi</span>
+                                          <span>Posted 5 days ago</span>
+                                      </div>
+                                      <div class="flex items-center space-x-4">
+                                          <span class="flex items-center text-gray-500">
+                                              <i class="far fa-comment mr-1"></i> 37 replies
+                                          </span>
+                                          <span class="flex items-center text-gray-500">
+                                              <i class="far fa-eye mr-1"></i> 243 views
+                                          </span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <!-- Topic 3 -->
+                      <div class="p-6 hover:bg-gray-50 transition duration-300">
+                          <div class="flex items-start">
+                              <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="User" class="w-12 h-12 rounded-full object-cover mr-4">
+                              <div class="flex-1">
+                                  <div class="flex justify-between items-start">
+                                      <h4 class="text-lg font-bold text-gray-800 hover:text-green-600 transition duration-300">Government subsidies for solar-powered farm equipment</h4>
+                                      <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Subsidies & Schemes</span>
+                                  </div>
+                                  <p class="text-gray-600 mt-2">Has anyone successfully applied for the new solar pump subsidy? What's the process and documentation required?</p>
+                                  <div class="flex justify-between items-center mt-4">
+                                      <div class="flex items-center text-sm text-gray-500">
+                                          <span class="font-medium text-gray-700 mr-2">Harpreet Singh</span>
+                                          <span>Posted 1 week ago</span>
+                                      </div>
+                                      <div class="flex items-center space-x-4">
+                                          <span class="flex items-center text-gray-500">
+                                              <i class="far fa-comment mr-1"></i> 19 replies
+                                          </span>
+                                          <span class="flex items-center text-gray-500">
+                                              <i class="far fa-eye mr-1"></i> 178 views
+                                          </span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div class="p-6 border-t">
+                      <div class="flex justify-between items-center">
+                          <div class="text-gray-600">Showing 3 of 156 topics</div>
+                          <div class="flex space-x-2">
+                              <button class="px-3 py-1 border border-gray-300 rounded text-gray-600 hover:bg-gray-100 transition duration-300">Previous</button>
+                              <button class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">1</button>
+                              <button class="px-3 py-1 border border-gray-300 rounded text-gray-600 hover:bg-gray-100 transition duration-300">2</button>
+                              <button class="px-3 py-1 border border-gray-300 rounded text-gray-600 hover:bg-gray-100 transition duration-300">3</button>
+                              <button class="px-3 py-1 border border-gray-300 rounded text-gray-600 hover:bg-gray-100 transition duration-300">Next</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+  
+      <!-- Expert Advice Section -->
+      <section id="experts" class="py-16 bg-white">
+          <div class="container mx-auto px-4">
+              <div class="text-center mb-12">
+                  <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Meet Our <span class="text-gradient">Experts</span></h2>
+                  <p class="text-xl text-gray-600 max-w-3xl mx-auto">Get advice from agricultural scientists, experienced farmers, and industry specialists.</p>
+              </div>
+              
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <!-- Expert 1 -->
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                      <div class="h-64 overflow-hidden">
+                          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Dr. Rajesh Kumar" class="w-full h-full object-cover">
+                      </div>
+                      <div class="p-6">
+                          <h3 class="text-xl font-bold text-gray-800 mb-1">Dr. Rajesh Kumar</h3>
+                          <p class="text-green-600 font-medium mb-3">Agricultural Scientist</p>
+                          <p class="text-gray-600 text-sm mb-4">Specializes in sustainable farming practices and soil health management with over 20 years of research experience.</p>
+                          <div class="flex space-x-3">
+                              <a href="#" class="text-gray-600 hover:text-green-600 transition duration-300">
+                                  <i class="fab fa-linkedin text-xl"></i>
+                              </a>
+                              <a href="#" class="text-gray-600 hover:text-green-600 transition duration-300">
+                                  <i class="fab fa-twitter text-xl"></i>
+                              </a>
+                              <a href="#" class="text-gray-600 hover:text-green-600 transition duration-300">
+                                  <i class="fas fa-envelope text-xl"></i>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- Expert 2 -->
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                      <div class="h-64 overflow-hidden">
+                          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Dr. Priya Sharma" class="w-full h-full object-cover">
+                      </div>
+                      <div class="p-6">
+                          <h3 class="text-xl font-bold text-gray-800 mb-1">Dr. Priya Sharma</h3>
+                          <p class="text-green-600 font-medium mb-3">Crop Disease Specialist</p>
+                          <p class="text-gray-600 text-sm mb-4">Expert in plant pathology and integrated pest management with a focus on organic solutions for crop protection.</p>
+                          <div class="flex space-x-3">
+                              <a href="#" class="text-gray-600 hover:text-green-600 transition duration-300">
+                                  <i class="fab fa-linkedin text-xl"></i>
+                              </a>
+                              <a href="#" class="text-gray-600 hover:text-green-600 transition duration-300">
+                                  <i class="fab fa-twitter text-xl"></i>
+                              </a>
+                              <a href="#" class="text-gray-600 hover:text-green-600 transition duration-300">
+                                  <i class="fas fa-envelope text-xl"></i>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- Expert 3 -->
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                      <div class="h-64 overflow-hidden">
+                          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Vikram Patel" class="w-full h-full object-cover">
+                      </div>
+                      <div class="p-6">
+                          <h3 class="text-xl font-bold text-gray-800 mb-1">Vikram Patel</h3>
+                          <p class="text-green-600 font-medium mb-3">Master Farmer</p>
+                          <p class="text-gray-600 text-sm mb-4">Award-winning farmer with 30   years of practical experience in innovative farming techniques and crop diversification.</p>
+                          <div class="flex space-x-3">
+                              <a href="#" class="text-gray-600 hover:text-green-600 transition duration-300">
+                                  <i class="fab fa-linkedin text-xl"></i>
+                              </a>
+                              <a href="#" class="text-gray-600 hover:text-green-600 transition duration-300">
+                                  <i class="fab fa-twitter text-xl"></i>
+                              </a>
+                              <a href="#" class="text-gray-600 hover:text-green-600 transition duration-300">
+                                  <i class="fas fa-envelope text-xl"></i>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="mt-12 text-center">
+                  <a href="#" class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 inline-block">Ask an Expert</a>
+              </div>
+          </div>
+      </section>
+  
+      <!-- Events Section -->
+      <section id="events" class="py-16 bg-gray-50">
+          <div class="container mx-auto px-4">
+              <div class="text-center mb-12">
+                  <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Upcoming <span class="text-gradient">Events</span></h2>
+                  <p class="text-xl text-gray-600 max-w-3xl mx-auto">Join our webinars, workshops, and meetups to enhance your farming knowledge and connect with others.</p>
+              </div>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <!-- Event 1 -->
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                      <div class="flex flex-col md:flex-row">
+                          <div class="md:w-1/3 bg-green-500 text-white p-6 flex flex-col justify-center items-center">
+                              <div class="text-3xl font-bold">25</div>
+                              <div class="text-xl">August</div>
+                              <div class="mt-4 text-sm">10:00 AM - 12:00 PM</div>
+                          </div>
+                          <div class="md:w-2/3 p-6">
+                              <div class="flex justify-between items-start">
+                                  <h3 class="text-xl font-bold text-gray-800 mb-2">Webinar: Climate-Smart Agriculture</h3>
+                                  <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Online</span>
+                              </div>
+                              <p class="text-gray-600 mb-4">Learn how to adapt your farming practices to changing climate conditions and reduce environmental impact.</p>
+                              <div class="flex items-center text-gray-500 mb-4">
+                                  <i class="fas fa-user mr-2"></i>
+                                  <span>Speaker: Dr. Rajesh Kumar</span>
+                              </div>
+                              <button class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Register Now</button>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- Event 2 -->
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                      <div class="flex flex-col md:flex-row">
+                          <div class="md:w-1/3 bg-green-500 text-white p-6 flex flex-col justify-center items-center">
+                              <div class="text-3xl font-bold">10</div>
+                              <div class="text-xl">September</div>
+                              <div class="mt-4 text-sm">9:00 AM - 5:00 PM</div>
+                          </div>
+                          <div class="md:w-2/3 p-6">
+                              <div class="flex justify-between items-start">
+                                  <h3 class="text-xl font-bold text-gray-800 mb-2">Workshop: Organic Certification</h3>
+                                  <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">In-Person</span>
+                              </div>
+                              <p class="text-gray-600 mb-4">A comprehensive workshop on the process, requirements, and benefits of obtaining organic certification for your farm.</p>
+                              <div class="flex items-center text-gray-500 mb-4">
+                                  <i class="fas fa-map-marker-alt mr-2"></i>
+                                  <span>Location: Agricultural Research Center, New Delhi</span>
+                              </div>
+                              <button class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Register Now</button>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- Event 3 -->
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                      <div class="flex flex-col md:flex-row">
+                          <div class="md:w-1/3 bg-green-500 text-white p-6 flex flex-col justify-center items-center">
+                              <div class="text-3xl font-bold">18</div>
+                              <div class="text-xl">September</div>
+                              <div class="mt-4 text-sm">3:00 PM - 4:30 PM</div>
+                          </div>
+                          <div class="md:w-2/3 p-6">
+                              <div class="flex justify-between items-start">
+                                  <h3 class="text-xl font-bold text-gray-800 mb-2">Webinar: Digital Marketing for Farmers</h3>
+                                  <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Online</span>
+                              </div>
+                              <p class="text-gray-600 mb-4">Learn how to use social media and digital platforms to market your farm products directly to consumers.</p>
+                              <div class="flex items-center text-gray-500 mb-4">
+                                  <i class="fas fa-user mr-2"></i>
+                                  <span>Speaker: Anita Desai, Digital Marketing Expert</span>
+                              </div>
+                              <button class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Register Now</button>
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <!-- Event 4 -->
+                  <div class="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
+                      <div class="flex flex-col md:flex-row">
+                          <div class="md:w-1/3 bg-green-500 text-white p-6 flex flex-col justify-center items-center">
+                              <div class="text-3xl font-bold">5</div>
+                              <div class="text-xl">October</div>
+                              <div class="mt-4 text-sm">10:00 AM - 1:00 PM</div>
+                          </div>
+                          <div class="md:w-2/3 p-6">
+                              <div class="flex justify-between items-start">
+                                  <h3 class="text-xl font-bold text-gray-800 mb-2">Farmers Meetup: Knowledge Exchange</h3>
+                                  <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">In-Person</span>
+                              </div>
+                              <p class="text-gray-600 mb-4">An informal gathering for farmers to share experiences, challenges, and solutions in a collaborative environment.</p>
+                              <div class="flex items-center text-gray-500 mb-4">
+                                  <i class="fas fa-map-marker-alt mr-2"></i>
+                                  <span>Location: Community Center, Agri Valley</span>
+                              </div>
+                              <button class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Register Now</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="mt-12 text-center">
+                  <a href="#" class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 inline-block">View All Events</a>
+              </div>
+          </div>
+      </section>
+  
+      <!-- CTA Section -->
+      <section class="py-16 bg-green-500 text-white">
+          <div class="container mx-auto px-4 text-center">
+              <h2 class="text-3xl md:text-4xl font-bold mb-6">Join Our Growing Community</h2>
+              <p class="text-xl mb-8 max-w-3xl mx-auto">Connect with thousands of farmers, share knowledge, and grow together. Sign up today to become part of our agricultural community.</p>
+              <div class="flex flex-col md:flex-row justify-center gap-4">
+                  <a href="signup.html" class="px-8 py-3 bg-white text-green-600 rounded-lg hover:bg-gray-100 transition duration-300 text-lg font-medium">Sign Up Now</a>
+                  <a href="contact.html" class="px-8 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-green-600 transition duration-300 text-lg font-medium">Contact Us</a>
+              </div>
+          </div>
+      </section>
+  
+      <!-- Footer -->
+      <footer class="bg-gray-800 text-white py-12">
+          <div class="container mx-auto px-4">
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                  <div>
+                      <div class="flex items-center mb-4">
+                          <i class="fas fa-leaf text-3xl text-green-500 mr-2"></i>
+                          <span class="text-2xl font-bold">AgriTech<span class="text-green-500">Hub</span></span>
+                      </div>
+                      <p class="text-gray-400 mb-4">Your complete farming companion with all the tools and resources you need from seed to market.</p>
+                      <div class="flex space-x-4">
+                          <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                              <i class="fab fa-facebook-f text-xl"></i>
+                          </a>
+                          <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                              <i class="fab fa-twitter text-xl"></i>
+                          </a>
+                          <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                              <i class="fab fa-instagram text-xl"></i>
+                          </a>
+                          <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                              <i class="fab fa-youtube text-xl"></i>
+                          </a>
+                      </div>
+                  </div>
+                  
+                  <div>
+                      <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                      <ul class="space-y-2">
+                          <li><a href="index.html" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                          <li><a href="features.html" class="text-gray-400 hover:text-white transition duration-300">Features</a></li>
+                          <li><a href="marketplace.html" class="text-gray-400 hover:text-white transition duration-300">Marketplace</a></li>
+                          <li><a href="weather.html" class="text-gray-400 hover:text-white transition duration-300">Weather</a></li>
+                          <li><a href="community.html" class="text-gray-400 hover:text-white transition duration-300">Community</a></li>
+                      </ul>
+                  </div>
+                  
+                  <div>
+                      <h3 class="text-lg font-bold mb-4">Resources</h3>
+                      <ul class="space-y-2">
+                          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Crop Library</a></li>
+                          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Farming Guides</a></li>
+                          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Market Prices</a></li>
+                          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Government Schemes</a></li>
+                          <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Expert Advice</a></li>
+                      </ul>
+                  </div>
+                  
+                  <div>
+                      <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                      <ul class="space-y-2">
+                          <li class="flex items-start">
+                              <i class="fas fa-map-marker-alt mt-1 mr-2 text-green-500"></i>
+                              <span class="text-gray-400">123 Farming Road, Agri Valley, New Delhi, India</span>
+                          </li>
+                          <li class="flex items-center">
+                              <i class="fas fa-phone-alt mr-2 text-green-500"></i>
+                              <span class="text-gray-400">  91 98765 43210</span>
+                          </li>
+                          <li class="flex items-center">
+                              <i class="fas fa-envelope mr-2 text-green-500"></i>
+                              <span class="text-gray-400">info@agritechhub.com</span>
+                          </li>
+                      </ul>
+                      <div class="mt-4">
+                          <h4 class="text-sm font-bold mb-2">Subscribe to our newsletter</h4>
+                          <div class="flex">
+                              <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-gray-800">
+                              <button class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-r-lg transition duration-300">
+                                  <i class="fas fa-paper-plane"></i>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                  <p>&copy; 2023 AgriTech Hub. All rights reserved.</p>
+              </div>
+          </div>
+      </footer>
+  
+      <!-- Optimized JavaScript loading -->
+      <script>
+          // Page loader
+          window.addEventListener('load', function() {
+              const loader = document.getElementById('loader');
+              setTimeout(function() {
+                  loader.style.opacity = '0';
+                  setTimeout(function() {
+                      loader.style.display = 'none';
+                  }, 500);
+              }, 500);
+          });
+  
+          // Mobile menu toggle
+          document.addEventListener('DOMContentLoaded', function() {
+              const mobileMenuButton = document.getElementById('mobile-menu-button');
+              const mobileMenu = document.getElementById('mobile-menu');
+              
+              if (mobileMenuButton && mobileMenu) {
+                  mobileMenuButton.addEventListener('click', function() {
+                      mobileMenu.classList.toggle('hidden');
+                  });
+              }
+              
+              // Navbar scroll effect
+              const navbar = document.getElementById('navbar');
+              
+              window.addEventListener('scroll', function() {
+                  if (window.scrollY > 50) {
+                      navbar.classList.add('py-2');
+                      navbar.classList.add('shadow-lg');
+                  } else {
+                      navbar.classList.remove('py-2');
+                      navbar.classList.remove('shadow-lg');
+                  }
+              });
+          });
+      </script>
+      
+      <!-- Deferred JavaScript loading for non-critical scripts -->
+      <script src="main.js" defer></script>
+  </body>
+  </html>

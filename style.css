@@ -1,0 +1,177 @@
+
+  /* Main Stylesheet for AgriTech Hub */
+  
+  /* Base Styles */
+  body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+      width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+      background: #27ae60;
+      border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+      background: #2ecc71;
+  }
+  
+  /* Text Gradient */
+  .text-gradient {
+      background: linear-gradient(90deg, #2ecc71, #27ae60);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+  }
+  
+  /* Animations */
+  .floating {
+      animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+  }
+  
+  .pulse {
+      animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+  }
+  
+  /* Card Styles */
+  .feature-card {
+      transition: all 0.3s ease;
+  }
+  
+  .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .crop-card {
+      overflow: hidden;
+  }
+  
+  .crop-card img {
+      transition: transform 0.5s ease;
+  }
+  
+  .crop-card:hover img {
+      transform: scale(1.1);
+  }
+  
+  /* Weather Widget */
+  .weather-widget {
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+  }
+  
+  .weather-widget:hover {
+      transform: scale(1.02);
+  }
+  
+  /* CTA Section */
+  .cta-section {
+      background: linear-gradient(135deg, #2ecc71, #27ae60);
+  }
+  
+  /* Loader animation */
+  .loader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      z-index: 9999;
+      transition: opacity 0.5s ease-out;
+  }
+  
+  .loader-hidden {
+      opacity: 0;
+      pointer-events: none;
+  }
+  
+  .loader-icon {
+      width: 80px;
+      height: 80px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #27ae60;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+  }
+  
+  /* Form Styles */
+  .form-input {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+  }
+  .form-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.5);
+      border-color: transparent;
+  }
+
+  .btn-primary {
+      padding: 0.5rem 1.5rem;
+      background-color: #22c55e;
+      color: white;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease;
+  }
+  .btn-primary:hover {
+      background-color: #16a34a;
+  }
+
+  .btn-secondary {
+      padding: 0.5rem 1.5rem;
+      border: 1px solid #22c55e;
+      color: #16a34a;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease;
+  }
+  .btn-secondary:hover {
+      background-color: rgba(34, 197, 94, 0.1);
+  }
+  
+  /* Testimonial Slider */
+  .testimonial-slider {
+      overflow: hidden;
+      position: relative;
+  }
+  
+  .testimonial-slide {
+      animation: slideAnimation 20s infinite linear;
+  }
+  
+  @keyframes slideAnimation {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+  }

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - AgriTech Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Page Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-icon"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i class="fas fa-leaf text-3xl text-green-500 mr-2"></i>
+                        <span class="text-2xl font-bold text-gray-800">AgriTech<span class="text-green-500">Hub</span></span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Home</a>
+                    <a href="features.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Features</a>
+                    <a href="crops.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Crops</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Marketplace</a>
+                    <a href="weather.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Weather</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Community</a>
+                    <a href="about.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">About</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Contact</a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="login.html" class="px-4 py-2 text-gray-700 hover:text-green-500 font-medium transition duration-300">Login</a>
+                    <a href="signup.html" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Sign Up</a>
+                    <a href="cart.html" class="relative text-gray-700 hover:text-green-500 transition duration-300">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <a href="cart.html" class="relative text-gray-700 hover:text-green-500 transition duration-300 mr-4">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="mobile-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-green-500 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Home</a>
+                    <a href="features.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Features</a>
+                    <a href="crops.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Crops</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Marketplace</a>
+                    <a href="weather.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Weather</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Community</a>
+                    <a href="about.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">About</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Contact</a>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="login.html" class="px-4 py-2 text-gray-700 hover:text-green-500 font-medium transition duration-300">Login</a>
+                        <a href="signup.html" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header py-20 md:py-28 mt-16 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4" data-aos="fade-up">Contact <span class="text-green-400">Us</span></h1>
+            <p class="text-xl max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Get in touch with our team for support, feedback, or partnership opportunities.</p>
+        </div>
+    </header>
+
+    <!-- Contact Information Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Contact Card 1 -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-md text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-map-marker-alt text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Our Location</h3>
+                    <p class="text-gray-600">123 Farming Road, Agri Valley</p>
+                    <p class="text-gray-600">New Delhi, 110001</p>
+                    <p class="text-gray-600">India</p>
+                </div>
+                
+                <!-- Contact Card 2 -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-md text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-phone-alt text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Phone Numbers</h3>
+                    <p class="text-gray-600">Customer Support: +91 98765 43210</p>
+                    <p class="text-gray-600">Technical Support: +91 98765 43211</p>
+                    <p class="text-gray-600">Business Inquiries: +91 98765 43212</p>
+                </div>
+                
+                <!-- Contact Card 3 -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-md text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-envelope text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Email Addresses</h3>
+                    <p class="text-gray-600">General Inquiries: info@agritechhub.com</p>
+                    <p class="text-gray-600">Support: support@agritechhub.com</p>
+                    <p class="text-gray-600">Partnerships: partners@agritechhub.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Send Us a <span class="text-gradient">Message</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Have questions or feedback? Fill out the form below and we'll get back to you as soon as possible.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md" data-aos="fade-up">
+                <form id="contact-form">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                            <input type="text" id="name" placeholder="Enter your full name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                            <input type="email" id="email" placeholder="Enter your email address" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                            <input type="tel" id="phone" placeholder="Enter your phone number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                            <select id="subject" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="message" class="block text-gray-700 font-medium mb-2">Your Message</label>
+                        <textarea id="message" rows="6" placeholder="Type your message here..." required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="form-checkbox h-5 w-5 text-green-500">
+                            <span class="ml-2 text-gray-700">I agree to receive email communications from AgriTech Hub.</span>
+                        </label>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button type="submit" class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Our <span class="text-gradient">Location</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Visit our office to meet our team and learn more about our services.</p>
+            </div>
+            
+            <div class="max-w-5xl mx-auto rounded-xl overflow-hidden shadow-md" data-aos="fade-up">
+                <div id="map" class="h-96 w-full"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div id="map" class="h-96 w-full" class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Frequently Asked <span class="text-gradient">Questions</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Find answers to common questions about our services and platform.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto" data-aos="fade-up">
+                <div class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <button class="faq-toggle flex justify-between items-center w-full text-left">
+                            <h3 class="text-lg font-bold text-gray-800">How do I sign up for AgriTech Hub?</h3>
+                            <i class="fas fa-chevron-down text-green-500 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden mt-4">
+                            <p class="text-gray-600">Signing up for AgriTech Hub is easy! Click on the "Sign Up" button in the top right corner of the website, fill in your details, and you'll have access to all our features. We offer a free basic plan and premium plans with additional features.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <button class="faq-toggle flex justify-between items-center w-full text-left">
+                            <h3 class="text-lg font-bold text-gray-800">Is my data secure on the platform?</h3>
+                            <i class="fas fa-chevron-down text-green-500 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden mt-4">
+                            <p class="text-gray-600">Yes, we take data security very seriously. All your information is encrypted and stored securely. We never share your personal data with third parties without your consent. You can review our privacy policy for more details on how we handle your data.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <button class="faq-toggle flex justify-between items-center w-full text-left">
+                            <h3 class="text-lg font-bold text-gray-800">How accurate is the weather forecasting?</h3>
+                            <i class="fas fa-chevron-down text-green-500 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden mt-4">
+                            <p class="text-gray-600">Our weather forecasting uses data from multiple reliable sources and is tailored specifically for agricultural needs. We provide forecasts with up to 90% accuracy for a 7-day period, and our system continuously improves through machine learning algorithms that adapt to local conditions.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 4 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <button class="faq-toggle flex justify-between items-center w-full text-left">
+                            <h3 class="text-lg font-bold text-gray-800">Can I sell my produce directly on the marketplace?</h3>
+                            <i class="fas fa-chevron-down text-green-500 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden mt-4">
+                            <p class="text-gray-600">Yes, you can list your agricultural products directly on our marketplace. Simply navigate to the Marketplace section, click on "Sell Your Produce," and follow the instructions to create your listing. You can set your own prices and connect directly with buyers without any middlemen.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 5 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <button class="faq-toggle flex justify-between items-center w-full text-left">
+                            <h3 class="text-lg font-bold text-gray-800">How can I get technical support if I have issues?</h3>
+                            <i class="fas fa-chevron-down text-green-500 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content hidden mt-4">
+                            <p class="text-gray-600">We offer multiple support channels. You can contact our technical support team via email at support@agritechhub.com, call our support hotline at +91 98765 43211, or use the live chat feature on our website during business hours. We typically respond to all inquiries within 24 hours.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-leaf text-3xl text-green-500 mr-2"></i>
+                        <span class="text-2xl font-bold">AgriTech<span class="text-green-500">Hub</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your complete farming companion with all the tools and resources you need from seed to market.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="features.html" class="text-gray-400 hover:text-white transition duration-300">Features</a></li>
+                        <li><a href="marketplace.html" class="text-gray-400 hover:text-white transition duration-300">Marketplace</a></li>
+                        <li><a href="weather.html" class="text-gray-400 hover:text-white transition duration-300">Weather</a></li>
+                        <li><a href="community.html" class="text-gray-400 hover:text-white transition duration-300">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Crop Library</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Farming Guides</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Market Prices</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Government Schemes</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Expert Advice</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-green-500"></i>
+                            <span class="text-gray-400">123 Farming Road, Agri Valley, New Delhi, India</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-green-500"></i>
+                            <span class="text-gray-400">+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-green-500"></i>
+                            <span class="text-gray-400">info@agritechhub.com</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4">
+                        <h4 class="text-sm font-bold mb-2">Subscribe to our newsletter</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-gray-800">
+                            <button class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-r-lg transition duration-300">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 AgriTech Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optimized JavaScript loading -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap" async defer></script>
+    
+    <!-- Main JavaScript -->
+    <script src="main.js" defer></script>
+    
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap" async defer></script>
+    
+    <!-- Contact Page Specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Toggle
+            const faqToggles = document.querySelectorAll('.faq-toggle');
+            
+            faqToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    content.classList.toggle('hidden');
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+            
+            // Contact Form Submission
+            const contactForm = document.getElementById('contact-form');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // In a real application, this would send the form data to a server
+                    // For demo purposes, we'll just show a success message
+                    
+                    // Get form data
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const phone = document.getElementById('phone').value;
+                    const subject = document.getElementById('subject').value;
+                    const message = document.getElementById('message').value;
+                    
+                    // Show success notification
+                    showNotification(`Thank you, ${name}! Your message has been sent successfully. We'll get back to you soon.`);
+                    
+                    // Reset form
+                    contactForm.reset();
+                });
+            }
+        });
+        
+        // Function to show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `fixed bottom-4 right-4 px-4 py-2 rounded-lg shadow-lg z-50 transform transition-transform duration-300 translate-y-20 ${type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-y-20');
+            }, 10);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-y-20');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

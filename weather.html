@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecasting - AgriTech Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Page Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-icon"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i class="fas fa-leaf text-3xl text-green-500 mr-2"></i>
+                        <span class="text-2xl font-bold text-gray-800">AgriTech<span class="text-green-500">Hub</span></span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Home</a>
+                    <a href="features.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Features</a>
+                    <a href="crops.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Crops</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Marketplace</a>
+                    <a href="weather.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Weather</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Community</a>
+                    <a href="about.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">About</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Contact</a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="login.html" class="px-4 py-2 text-gray-700 hover:text-green-500 font-medium transition duration-300">Login</a>
+                    <a href="signup.html" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Sign Up</a>
+                    <a href="cart.html" class="relative text-gray-700 hover:text-green-500 transition duration-300">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <a href="cart.html" class="relative text-gray-700 hover:text-green-500 transition duration-300 mr-4">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="mobile-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-green-500 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Home</a>
+                    <a href="features.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Features</a>
+                    <a href="crops.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Crops</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Marketplace</a>
+                    <a href="weather.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Weather</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Community</a>
+                    <a href="about.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">About</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Contact</a>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="login.html" class="px-4 py-2 text-gray-700 hover:text-green-500 font-medium transition duration-300">Login</a>
+                        <a href="signup.html" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header py-20 md:py-28 mt-16 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4" data-aos="fade-up">Weather <span class="text-green-400">Forecasting</span></h1>
+            <p class="text-xl max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Get accurate weather predictions and alerts tailored for your farm's location to help you plan activities effectively.</p>
+        </div>
+    </header>
+
+    <!-- Weather Search Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto bg-gray-50 p-6 rounded-xl shadow-md" data-aos="fade-up">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Search Weather for Your Location</h2>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <input type="text" id="location-search" placeholder="Enter city or region" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    <button id="search-weather-btn" class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">
+                        <i class="fas fa-search mr-2"></i> Get Weather
+                    </button>
+                </div>
+                <p class="text-sm text-gray-500 mt-2">For best results, enter city name and country (e.g., "New Delhi, India")</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Weather Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Current <span class="text-gradient">Weather</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Real-time weather information for your selected location.</p>
+            </div>
+            
+            <div class="weather-widget p-6 text-white max-w-4xl mx-auto bg-gradient-to-r from-green-600 to-blue-600 rounded-xl shadow-lg transition-all duration-500" data-aos="fade-up">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-6 md:mb-0">
+                        <div class="text-5xl font-bold mb-2" id="current-temp">Loading...</div>
+                        <div class="text-xl" id="weather-condition">Fetching data</div>
+                        <div class="text-lg mt-2" id="weather-location">Please wait</div>
+                        <div class="mt-4">
+                            <div class="flex items-center" id="wind-speed">
+                                <i class="fas fa-wind mr-2"></i>
+                                <span>Wind: --</span>
+                            </div>
+                            <div class="flex items-center mt-1" id="humidity">
+                                <i class="fas fa-tint mr-2"></i>
+                                <span>Humidity: --</span>
+                            </div>
+                            <div class="flex items-center mt-1">
+                                <i class="fas fa-sun mr-2"></i>
+                                <span>UV Index: --</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <i class="fas fa-cloud-sun text-8xl mb-4 pulse"></i>
+                        <div class="text-lg" id="last-updated">Updating...</div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                    <!-- Forecast data will be populated dynamically by JavaScript -->
+                    <div class="p-3 bg-white bg-opacity-20 rounded-lg animate-pulse">
+                        <div class="text-sm">Loading</div>
+                        <i class="fas fa-spinner fa-spin text-2xl my-2"></i>
+                        <div class="text-lg font-bold">--°C</div>
+                    </div>
+                    <div class="p-3 bg-white bg-opacity-20 rounded-lg animate-pulse">
+                        <div class="text-sm">Loading</div>
+                        <i class="fas fa-spinner fa-spin text-2xl my-2"></i>
+                        <div class="text-lg font-bold">--°C</div>
+                    </div>
+                    <div class="p-3 bg-white bg-opacity-20 rounded-lg animate-pulse">
+                        <div class="text-sm">Loading</div>
+                        <i class="fas fa-spinner fa-spin text-2xl my-2"></i>
+                        <div class="text-lg font-bold">--°C</div>
+                    </div>
+                    <div class="p-3 bg-white bg-opacity-20 rounded-lg animate-pulse">
+                        <div class="text-sm">Loading</div>
+                        <i class="fas fa-spinner fa-spin text-2xl my-2"></i>
+                        <div class="text-lg font-bold">--°C</div>
+                    </div>
+                    <div class="p-3 bg-white bg-opacity-20 rounded-lg animate-pulse">
+                        <div class="text-sm">Loading</div>
+                        <i class="fas fa-spinner fa-spin text-2xl my-2"></i>
+                        <div class="text-lg font-bold">--°C</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weather Alerts Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Weather <span class="text-gradient">Alerts</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Stay informed about potential weather hazards that could affect your farm.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-5 rounded-r-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>
+                        <h3 class="text-lg font-bold text-gray-800">Heavy Rain Warning</h3>
+                    </div>
+                    <p class="text-gray-700">Heavy rainfall expected in the next 48 hours. Consider postponing outdoor activities and ensure proper drainage in your fields.</p>
+                    <p class="text-sm text-gray-500 mt-2">Issued: June 15, 2023 | Valid until: June 17, 2023</p>
+                </div>
+                
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-5 rounded-r-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+                        <h3 class="text-lg font-bold text-gray-800">Temperature Advisory</h3>
+                    </div>
+                    <p class="text-gray-700">Temperatures expected to rise above normal in the coming week. Ensure adequate irrigation for your crops.</p>
+                    <p class="text-sm text-gray-500 mt-2">Issued: June 14, 2023 | Valid until: June 21, 2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weather Impact Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Crop-Specific <span class="text-gradient">Weather Impact</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Understand how current and forecasted weather conditions may affect your specific crops.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="crop-impact-container">
+                <!-- Crop impact cards will be dynamically generated by JavaScript -->
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1586201375761-83865001e8ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Rice" class="w-12 h-12 rounded-full object-cover mr-3">
+                        <h3 class="text-xl font-bold text-gray-800">Rice</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">Loading weather impact analysis...</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-sync-alt animate-spin mr-2"></i>
+                        <span>Updating recommendations</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1574323347407-f5e1c5a1ec21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Wheat" class="w-12 h-12 rounded-full object-cover mr-3">
+                        <h3 class="text-xl font-bold text-gray-800">Wheat</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">Loading weather impact analysis...</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-sync-alt animate-spin mr-2"></i>
+                        <span>Updating recommendations</span>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Tomatoes" class="w-12 h-12 rounded-full object-cover mr-3">
+                        <h3 class="text-xl font-bold text-gray-800">Tomatoes</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">Loading weather impact analysis...</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-sync-alt animate-spin mr-2"></i>
+                        <span>Updating recommendations</span>
+                    </div>
+                </div>g src="https://images.unsplash.com/photo-1601599561213-832382fd07ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Wheat" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <h3 class="text-xl font-bold text-gray-800">Wheat</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <div class="w-24 text-gray-600">Temperature:</div>
+                            <div class="flex-1 flex items-center">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: 70%"></div>
+                                </div>
+                                <span class="text-sm text-gray-600">Optimal</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-24 text-gray-600">Rainfall:</div>
+                            <div class="flex-1 flex items-center">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                    <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 90%"></div>
+                                </div>
+                                <span class="text-sm text-gray-600">High</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-24 text-gray-600">Humidity:</div>
+                            <div class="flex-1 flex items-center">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                    <div class="bg-red-500 h-2.5 rounded-full" style="width: 85%"></div>
+                                </div>
+                                <span class="text-sm text-gray-600">High</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-yellow-50 rounded-lg">
+                        <p class="text-sm text-gray-700"><strong>Advisory:</strong> High humidity and rainfall may increase risk of fungal diseases. Consider preventive fungicide application.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1566383444833-43afb88e5dc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Rice" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <h3 class="text-xl font-bold text-gray-800">Rice</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <div class="w-24 text-gray-600">Temperature:</div>
+                            <div class="flex-1 flex items-center">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: 80%"></div>
+                                </div>
+                                <span class="text-sm text-gray-600">Optimal</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-24 text-gray-600">Rainfall:</div>
+                            <div class="flex-1 flex items-center">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: 75%"></div>
+                                </div>
+                                <span class="text-sm text-gray-600">Optimal</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-24 text-gray-600">Humidity:</div>
+                            <div class="flex-1 flex items-center">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                    <div class="bg-green-600 h-2.5 rounded-full" style="width: 70%"></div>
+                                </div>
+                                <span class="text-sm text-gray-600">Optimal</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                        <p class="text-sm text-gray-700"><strong>Advisory:</strong> Current conditions are favorable for rice growth. Maintain water levels in paddy fields.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center mb-4">
+                        <img src="https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Corn" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <h3 class="text-xl font-bold text-gray-800">Corn</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <div class="w-24 text-gray-600">Temperature:</div>
+                            <div class="flex-1 flex items-center">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                    <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 90%"></div>
+                                </div>
+                                <span class="text-sm text-gray-600">High</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-24 text-gray-600">Rainfall:</div>
+                            <div class="flex-1 flex items-center">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                    <div class="bg-red-500 h-2.5 rounded-full" style="width: 40%"></div>
+                                </div>
+                                <span class="text-sm text-gray-600">Low</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-24 text-gray-600">Humidity:</div>
+                            <div class="flex-1 flex items-center">
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 mr-2">
+                                    <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 60%"></div>
+                                </div>
+                                <span class="text-sm text-gray-600">Moderate</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-red-50 rounded-lg">
+                        <p class="text-sm text-gray-700"><strong>Advisory:</strong> Low rainfall may stress corn plants. Increase irrigation frequency and consider mulching to retain soil moisture.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weather Insights Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Weather <span class="text-gradient">Insights</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Historical data and trends to help you make informed decisions.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Monthly Rainfall Comparison</h3>
+                    <div class="h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <!-- In a real application, this would be a chart -->
+                        <p class="text-gray-500"><img src='rainfall chart.png'> </p>
+                    </div>
+                    <p class="mt-4 text-gray-600">Rainfall this month is 20% higher than the same period last year, and 15% above the 10-year average.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Temperature Trends</h3>
+                    <div class="h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <!-- In a real application, this would be a chart -->
+                        <p class="text-gray-500"><img src='temperature chart.png'> </p>
+                    </div>
+                    <p class="mt-4 text-gray-600">Average temperatures have been 2°C higher than normal for this time of year, indicating an early onset of summer conditions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weather Notification Setup -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-md" data-aos="fade-up">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Set Up Weather Alerts</h2>
+                <p class="text-gray-600 mb-6">Receive timely notifications about weather conditions that matter to your farm.</p>
+                
+                <form id="weather-alert-form">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="alert-location" class="block text-gray-700 font-medium mb-2">Location</label>
+                            <input type="text" id="alert-location" placeholder="Enter your farm location" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="alert-phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                            <input type="tel" id="alert-phone" placeholder="For SMS alerts" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Alert Types</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox h-5 w-5 text-green-500">
+                                <span class="ml-2 text-gray-700">Rainfall Alerts</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox h-5 w-5 text-green-500">
+                                <span class="ml-2 text-gray-700">Temperature Alerts</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox h-5 w-5 text-green-500">
+                                <span class="ml-2 text-gray-700">Storm Warnings</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox h-5 w-5 text-green-500">
+                                <span class="ml-2 text-gray-700">Frost Alerts</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox h-5 w-5 text-green-500">
+                                <span class="ml-2 text-gray-700">Humidity Alerts</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="form-checkbox h-5 w-5 text-green-500">
+                                <span class="ml-2 text-gray-700">Wind Alerts</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Alert Frequency</label>
+                        <div class="flex flex-wrap gap-4">
+                            <label class="flex items-center">
+                                <input type="radio" name="frequency" class="form-radio h-5 w-5 text-green-500">
+                                <span class="ml-2 text-gray-700">Daily</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="frequency" class="form-radio h-5 w-5 text-green-500" checked>
+                                <span class="ml-2 text-gray-700">Only when conditions change</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="frequency" class="form-radio h-5 w-5 text-green-500">
+                                <span class="ml-2 text-gray-700">Weekly summary</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">
+                        <i class="fas fa-bell mr-2"></i> Set Up Alerts
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-leaf text-3xl text-green-500 mr-2"></i>
+                        <span class="text-2xl font-bold">AgriTech<span class="text-green-500">Hub</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your complete farming companion with all the tools and resources you need from seed to market.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="features.html" class="text-gray-400 hover:text-white transition duration-300">Features</a></li>
+                        <li><a href="marketplace.html" class="text-gray-400 hover:text-white transition duration-300">Marketplace</a></li>
+                        <li><a href="weather.html" class="text-gray-400 hover:text-white transition duration-300">Weather</a></li>
+                        <li><a href="community.html" class="text-gray-400 hover:text-white transition duration-300">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Crop Library</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Farming Guides</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Market Prices</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Government Schemes</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Expert Advice</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-green-500"></i>
+                            <span class="text-gray-400">123 Farming Road, Agri Valley, New Delhi, India</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-green-500"></i>
+                            <span class="text-gray-400">+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-green-500"></i>
+                            <span class="text-gray-400">info@agritechhub.com</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4">
+                        <h4 class="text-sm font-bold mb-2">Subscribe to our newsletter</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-gray-800">
+                            <button class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-r-lg transition duration-300">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 AgriTech Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    
+    <!-- Main JavaScript -->
+    <script src="main.js" defer></script>
+    
+    <!-- Weather Page Specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize weather data
+            getWeatherData();
+            
+            // Set up search functionality
+            const searchButton = document.getElementById('search-weather-btn');
+            const locationInput = document.getElementById('location-search');
+            
+            if (searchButton && locationInput) {
+                searchButton.addEventListener('click', function() {
+                    const location = locationInput.value.trim();
+                    if (location) {
+                        getWeatherData(location);
+                        showNotification(`Weather updated for ${location}`);
+                    } else {
+                        showNotification('Please enter a location', 'error');
+                    }
+                });
+                
+                // Allow pressing Enter to search
+                locationInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        searchButton.click();
+                    }
+                });
+            }
+            
+            // Set up weather alert form
+            const alertForm = document.getElementById('weather-alert-form');
+            if (alertForm) {
+                alertForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    showNotification('Weather alerts have been set up successfully!');
+                });
+            }
+        });
+        
+        // Function to show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `fixed bottom-4 right-4 px-4 py-2 rounded-lg shadow-lg z-50 transform transition-transform duration-300 translate-y-20 ${type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-y-20');
+            }, 10);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-y-20');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - AgriTech Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Page Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-icon"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i class="fas fa-leaf text-3xl text-green-500 mr-2"></i>
+                        <span class="text-2xl font-bold text-gray-800">AgriTech<span class="text-green-500">Hub</span></span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Home</a>
+                    <a href="features.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Features</a>
+                    <a href="crops.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Crops</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Marketplace</a>
+                    <a href="weather.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Weather</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Community</a>
+                    <a href="about.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">About</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Contact</a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="login.html" class="px-4 py-2 text-gray-700 hover:text-green-500 font-medium transition duration-300">Login</a>
+                    <a href="signup.html" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Sign Up</a>
+                    <a href="cart.html" class="relative text-gray-700 hover:text-green-500 transition duration-300">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <a href="cart.html" class="relative text-gray-700 hover:text-green-500 transition duration-300 mr-4">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="mobile-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-green-500 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Home</a>
+                    <a href="features.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Features</a>
+                    <a href="crops.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Crops</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Marketplace</a>
+                    <a href="weather.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Weather</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Community</a>
+                    <a href="about.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">About</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Contact</a>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="login.html" class="px-4 py-2 text-gray-700 hover:text-green-500 font-medium transition duration-300">Login</a>
+                        <a href="signup.html" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header py-20 md:py-28 mt-16 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4" data-aos="fade-up">Farmer's <span class="text-green-400">Marketplace</span></h1>
+            <p class="text-xl max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Buy supplies, sell produce, and connect directly with buyers and sellers without middlemen.</p>
+        </div>
+    </header>
+
+    <!-- Search and Filter Section -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-between" data-aos="fade-up">
+                <div class="w-full md:w-1/2">
+                    <div class="relative">
+                        <input type="text" placeholder="Search products..." class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                    <select class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">All Categories</option>
+                        <option value="seeds">Seeds</option>
+                        <option value="fertilizers">Fertilizers</option>
+                        <option value="pesticides">Pesticides</option>
+                        <option value="tools">Tools & Equipment</option>
+                        <option value="produce">Farm Produce</option>
+                    </select>
+                    <select class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <option value="">Sort By</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Rating</option>
+                        <option value="newest">Newest First</option>
+                    </select>
+                    <button class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">
+                        <i class="fas fa-filter mr-2"></i> Filter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Featured <span class="text-gradient">Products</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Top-rated agricultural products selected for quality and value.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative">
+                        <div class="h-48 overflow-hidden">
+                            <img src="wheat seeds.jpg" alt="Organic Seeds" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">Featured</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Seeds</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.8 (120)</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Premium Wheat Seeds</h3>
+                        <p class="text-gray-600 text-sm mb-3">High-yield, disease-resistant wheat variety.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹1,200/kg</span>
+                            <button onclick="addToCart('seed-001', 'Premium Wheat Seeds', 1200)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                        <a href="#" class="block text-center mt-3 text-green-600 hover:text-green-700 font-medium">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative">
+                        <div class="h-48 overflow-hidden">
+                            <img src="fertilizer.jpg" alt="Fertilizer" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-2 left-2 bg-blue-500 text-white text-xs px-2 py-1 rounded">Best Seller</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Fertilizer</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.7 (95)</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Bio-Organic Fertilizer</h3>
+                        <p class="text-gray-600 text-sm mb-3">Nutrient-rich organic fertilizer for all crops.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹850/bag</span>
+                            <button onclick="addToCart('fert-001', 'Bio-Organic Fertilizer', 850)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                        <a href="#" class="block text-center mt-3 text-green-600 hover:text-green-700 font-medium">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative">
+                        <div class="h-48 overflow-hidden">
+                            <img src="tractor.jpg" alt="Tractor" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">Sale</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Equipment</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.9 (78)</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Mini Tractor</h3>
+                        <p class="text-gray-600 text-sm mb-3">Compact tractor for small to medium farms.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-lg font-bold text-gray-800">₹2,50,000</span>
+                                <span class="text-sm text-gray-500 line-through ml-2">₹2,75,000</span>
+                            </div>
+                            <button onclick="addToCart('equip-001', 'Mini Tractor', 250000)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                        <a href="#" class="block text-center mt-3 text-green-600 hover:text-green-700 font-medium">View Details</a>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="relative">
+                        <div class="h-48 overflow-hidden">
+                            <img src="neem.jpg" alt="Pesticide" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute top-2 left-2 bg-purple-500 text-white text-xs px-2 py-1 rounded">Eco-friendly</div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Pesticide</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.6 (52)</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Neem-Based Pesticide</h3>
+                        <p class="text-gray-600 text-sm mb-3">Natural pest control solution for organic farming.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹450/liter</span>
+                            <button onclick="addToCart('pest-001', 'Neem-Based Pesticide', 450)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                        <a href="#" class="block text-center mt-3 text-green-600 hover:text-green-700 font-medium">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Categories Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Product <span class="text-gradient">Categories</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Browse our wide range of agricultural products by category.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <!-- Category 1 -->
+                <a href="#" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-6">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-seedling text-2xl text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Seeds</h3>
+                        <p class="text-sm text-gray-600 mt-2">120+ Products</p>
+                    </div>
+                </a>
+                
+                <!-- Category 2 -->
+                <a href="#" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="p-6">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-flask text-2xl text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Fertilizers</h3>
+                        <p class="text-sm text-gray-600 mt-2">85+ Products</p>
+                    </div>
+                </a>
+                
+                <!-- Category 3 -->
+                <a href="#" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="p-6">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-bug text-2xl text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Pesticides</h3>
+                        <p class="text-sm text-gray-600 mt-2">60+ Products</p>
+                    </div>
+                </a>
+                
+                <!-- Category 4 -->
+                <a href="#" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 text-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="p-6">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-tractor text-2xl text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Equipment</h3>
+                        <p class="text-sm text-gray-600 mt-2">95+ Products</p>
+                    </div>
+                </a>
+                
+                <!-- Category 5 -->
+                <a href="#" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 text-center" data-aos="fade-up" data-aos-delay="500">
+                    <div class="p-6">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-apple-alt text-2xl text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Produce</h3>
+                        <p class="text-sm text-gray-600 mt-2">150+ Products</p>
+                    </div>
+                </a>
+                
+                <!-- Category 6 -->
+                <a href="#" class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 text-center" data-aos="fade-up" data-aos-delay="600">
+                    <div class="p-6">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-tools text-2xl text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Tools</h3>
+                        <p class="text-sm text-gray-600 mt-2">110+ Products</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Products Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">All <span class="text-gradient">Products</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Explore our complete range of agricultural products.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up">
+                    <div class="h-48 overflow-hidden">
+                        <img src="wheat seeds.jpg" alt="Organic Seeds" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Seeds</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.8</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Premium Wheat Seeds</h3>
+                        <p class="text-gray-600 text-sm mb-3">High-yield, disease-resistant wheat variety.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹1,200/kg</span>
+                            <button onclick="addToCart('seed-001', 'Premium Wheat Seeds', 1200)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up">
+                    <div class="h-48 overflow-hidden">
+                        <img src="fertilizer.jpg" alt="Fertilizer" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Fertilizer</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.7</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Bio-Organic Fertilizer</h3>
+                        <p class="text-gray-600 text-sm mb-3">Nutrient-rich organic fertilizer for all crops.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹850/bag</span>
+                            <button onclick="addToCart('fert-001', 'Bio-Organic Fertilizer', 850)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up">
+                    <div class="h-48 overflow-hidden">
+                        <img src="tractor.jpg" alt="Tractor" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Equipment</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.9</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Mini Tractor</h3>
+                        <p class="text-gray-600 text-sm mb-3">Compact tractor for small to medium farms.</p>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-lg font-bold text-gray-800">₹2,50,000</span>
+                                <span class="text-sm text-gray-500 line-through ml-2">₹2,75,000</span>
+                            </div>
+                            <button onclick="addToCart('equip-001', 'Mini Tractor', 250000)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up">
+                    <div class="h-48 overflow-hidden">
+                        <img src="neem.jpg" alt="Pesticide" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Pesticide</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.6</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Neem-Based Pesticide</h3>
+                        <p class="text-gray-600 text-sm mb-3">Natural pest control solution for organic farming.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹450/liter</span>
+                            <button onclick="addToCart('pest-001', 'Neem-Based Pesticide', 450)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up">
+                    <div class="h-48 overflow-hidden">
+                        <img src="hybrid rice.png" alt="Rice Seeds" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Seeds</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.5</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Hybrid Rice Seeds</h3>
+                        <p class="text-gray-600 text-sm mb-3">High-yielding rice variety for paddy cultivation.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹950/kg</span>
+                            <button onclick="addToCart('seed-002', 'Hybrid Rice Seeds', 950)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up">
+                    <div class="h-48 overflow-hidden">
+                        <img src="drip kit.webp" alt="Irrigation System" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Equipment</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.8</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Drip Irrigation Kit</h3>
+                        <p class="text-gray-600 text-sm mb-3">Water-efficient irrigation system for 1 acre.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹15,000</span>
+                            <button onclick="addToCart('equip-002', 'Drip Irrigation Kit', 15000)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 7 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up">
+                    <div class="h-48 overflow-hidden">
+                        <img src="mini harvester.jpg" alt="Harvester" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Equipment</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.7</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Mini Harvester</h3>
+                        <p class="text-gray-600 text-sm mb-3">Compact harvester for small to medium farms.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹3,50,000</span>
+                            <button onclick="addToCart('equip-003', 'Mini Harvester', 350000)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 8 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up">
+                    <div class="h-48 overflow-hidden">
+                        <img src="corn seeds.jpg" alt="Corn Seeds" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Seeds</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.6</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Sweet Corn Seeds</h3>
+                        <p class="text-gray-600 text-sm mb-3">High-quality sweet corn variety for cultivation.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹1,100/kg</span>
+                            <button onclick="addToCart('seed-003', 'Sweet Corn Seeds', 1100)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-12">
+                <button class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">
+                    Load More Products
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sell Your Produce Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Sell Your <span class="text-gradient">Produce</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">List your agricultural products and connect directly with buyers.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto bg-gray-50 p-8 rounded-xl shadow-md" data-aos="fade-up">
+                <form>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="product-name" class="block text-gray-700 font-medium mb-2">Product Name</label>
+                            <input type="text" id="product-name" placeholder="e.g., Organic Rice, Fresh Tomatoes" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="product-category" class="block text-gray-700 font-medium mb-2">Category</label>
+                            <select id="product-category" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="">Select category</option>
+                                <option value="grains">Grains</option>
+                                <option value="vegetables">Vegetables</option>
+                                <option value="fruits">Fruits</option>
+                                <option value="dairy">Dairy Products</option>
+                                <option value="poultry">Poultry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div>
+                            <label for="product-quantity" class="block text-gray-700 font-medium mb-2">Quantity</label>
+                            <input type="number" id="product-quantity" min="1" placeholder="e.g., 100" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="product-unit" class="block text-gray-700 font-medium mb-2">Unit</label>
+                            <select id="product-unit" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="">Select unit</option>
+                                <option value="kg">Kilograms (kg)</option>
+                                <option value="quintal">Quintal</option>
+                                <option value="ton">Ton</option>
+                                <option value="dozen">Dozen</option>
+                                <option value="piece">Piece</option>
+                                <option value="liter">Liter</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="product-price" class="block text-gray-700 font-medium mb-2">Price per Unit (₹)</label>
+                            <input type="number" id="product-price" min="1" placeholder="e.g., 50" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="product-description" class="block text-gray-700 font-medium mb-2">Description</label>
+                        <textarea id="product-description" rows="4" placeholder="Describe your product, quality, harvesting date, etc." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="product-images" class="block text-gray-700 font-medium mb-2">Product Images</label>
+                        <input type="file" id="product-images" accept="image/*" multiple class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        <p class="text-sm text-gray-500 mt-1">Upload up to 5 images of your product. Clear images help attract more buyers.</p>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button type="button" class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">
+                            <i class="fas fa-upload mr-2"></i> List Product
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-leaf text-3xl text-green-500 mr-2"></i>
+                        <span class="text-2xl font-bold">AgriTech<span class="text-green-500">Hub</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your complete farming companion with all the tools and resources you need from seed to market.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="features.html" class="text-gray-400 hover:text-white transition duration-300">Features</a></li>
+                        <li><a href="marketplace.html" class="text-gray-400 hover:text-white transition duration-300">Marketplace</a></li>
+                        <li><a href="weather.html" class="text-gray-400 hover:text-white transition duration-300">Weather</a></li>
+                        <li><a href="community.html" class="text-gray-400 hover:text-white transition duration-300">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Crop Library</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Farming Guides</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Market Prices</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Government Schemes</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Expert Advice</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-green-500"></i>
+                            <span class="text-gray-400">123 Farming Road, Agri Valley, New Delhi, India</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-green-500"></i>
+                            <span class="text-gray-400">+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-green-500"></i>
+                            <span class="text-gray-400">info@agritechhub.com</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4">
+                        <h4 class="text-sm font-bold mb-2">Subscribe to our newsletter</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-gray-800">
+                            <button class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-r-lg transition duration-300">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 AgriTech Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Optimized JavaScript loading -->
+    <script>
+        // Page loader
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('loader');
+            setTimeout(function() {
+                loader.style.opacity = '0';
+                setTimeout(function() {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 500);
+        });
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('py-2');
+                    navbar.classList.add('shadow-lg');
+                } else {
+                    navbar.classList.remove('py-2');
+                    navbar.classList.remove('shadow-lg');
+                }
+            });
+        });
+    </script>
+    
+    <!-- Deferred JavaScript loading for non-critical scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script src="main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - AgriTech Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Page Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-icon"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center">
+                        <i class="fas fa-leaf text-3xl text-green-500 mr-2"></i>
+                        <span class="text-2xl font-bold text-gray-800">AgriTech<span class="text-green-500">Hub</span></span>
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Home</a>
+                    <a href="features.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Features</a>
+                    <a href="crops.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Crops</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Marketplace</a>
+                    <a href="weather.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Weather</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Community</a>
+                    <a href="about.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">About</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Contact</a>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="login.html" class="px-4 py-2 text-gray-700 hover:text-green-500 font-medium transition duration-300">Login</a>
+                    <a href="signup.html" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Sign Up</a>
+                    <a href="cart.html" class="relative text-gray-700 hover:text-green-500 transition duration-300">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <a href="cart.html" class="relative text-gray-700 hover:text-green-500 transition duration-300 mr-4">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="mobile-cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </a>
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-green-500 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-4 pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Home</a>
+                    <a href="features.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Features</a>
+                    <a href="crops.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Crops</a>
+                    <a href="marketplace.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Marketplace</a>
+                    <a href="weather.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Weather</a>
+                    <a href="community.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Community</a>
+                    <a href="about.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">About</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-green-500 font-medium transition duration-300">Contact</a>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="login.html" class="px-4 py-2 text-gray-700 hover:text-green-500 font-medium transition duration-300">Login</a>
+                        <a href="signup.html" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header py-20 md:py-28 mt-16 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4" data-aos="fade-up">Your <span class="text-green-400">Shopping Cart</span></h1>
+            <p class="text-xl max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Review your items and proceed to checkout.</p>
+        </div>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div id="cart-container" data-aos="fade-up">
+                <!-- Empty Cart State (will be hidden if cart has items) -->
+                <div id="empty-cart" class="text-center py-12 hidden">
+                    <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shopping-cart text-4xl text-gray-400"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Your Cart is Empty</h2>
+                    <p class="text-gray-600 mb-8">Looks like you haven't added any products to your cart yet.</p>
+                    <a href="marketplace.html" class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300">
+                        <i class="fas fa-shopping-basket mr-2"></i> Browse Products
+                    </a>
+                </div>
+                
+                <!-- Cart Items (will be populated by JavaScript) -->
+                <div id="cart-items" class="mb-8">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="py-3 px-4 text-left text-gray-700 font-semibold">Product</th>
+                                    <th class="py-3 px-4 text-center text-gray-700 font-semibold">Price</th>
+                                    <th class="py-3 px-4 text-center text-gray-700 font-semibold">Quantity</th>
+                                    <th class="py-3 px-4 text-center text-gray-700 font-semibold">Total</th>
+                                    <th class="py-3 px-4 text-center text-gray-700 font-semibold">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cart-items-body">
+                                <!-- Cart items will be dynamically added here -->
+                                
+                                <!-- Sample Item (will be replaced by dynamic content) -->
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center">
+                                            <img src="https://images.unsplash.com/photo-1620277489752-2f6d7c45c8c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80" alt="Premium Wheat Seeds" class="w-16 h-16 object-cover rounded-md mr-4">
+                                            <div>
+                                                <h3 class="text-lg font-bold text-gray-800">Premium Wheat Seeds</h3>
+                                                <p class="text-sm text-gray-600">High-yield, disease-resistant variety</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">₹1,200/kg</td>
+                                    <td class="py-4 px-4 text-center">
+                                        <div class="flex items-center justify-center">
+                                            <button class="quantity-btn px-2 py-1 bg-gray-200 rounded-l-md hover:bg-gray-300">-</button>
+                                            <input type="number" value="2" min="1" class="w-12 text-center border-t border-b border-gray-200 py-1">
+                                            <button class="quantity-btn px-2 py-1 bg-gray-200 rounded-r-md hover:bg-gray-300">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4 text-center font-bold">₹2,400</td>
+                                    <td class="py-4 px-4 text-center">
+                                        <button class="text-red-500 hover:text-red-700">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-4 px-4">
+                                        <div class="flex items-center">
+                                            <img src="https://images.unsplash.com/photo-1616112205093-6e71d79c5136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80" alt="Bio-Organic Fertilizer" class="w-16 h-16 object-cover rounded-md mr-4">
+                                            <div>
+                                                <h3 class="text-lg font-bold text-gray-800">Bio-Organic Fertilizer</h3>
+                                                <p class="text-sm text-gray-600">Nutrient-rich organic fertilizer</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4 text-center">₹850/bag</td>
+                                    <td class="py-4 px-4 text-center">
+                                        <div class="flex items-center justify-center">
+                                            <button class="quantity-btn px-2 py-1 bg-gray-200 rounded-l-md hover:bg-gray-300">-</button>
+                                            <input type="number" value="1" min="1" class="w-12 text-center border-t border-b border-gray-200 py-1">
+                                            <button class="quantity-btn px-2 py-1 bg-gray-200 rounded-r-md hover:bg-gray-300">+</button>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-4 text-center font-bold">₹850</td>
+                                    <td class="py-4 px-4 text-center">
+                                        <button class="text-red-500 hover:text-red-700">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Cart Summary -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                    <!-- Coupon and Notes -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Apply Coupon</h3>
+                        <div class="flex mb-6">
+                            <input type="text" placeholder="Enter coupon code" class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            <button class="px-4 py-2 bg-green-500 text-white rounded-r-lg hover:bg-green-600 transition duration-300">Apply</button>
+                        </div>
+                        
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Order Notes</h3>
+                        <textarea placeholder="Special instructions for delivery or product requirements..." rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"></textarea>
+                    </div>
+                    
+                    <!-- Order Summary -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-md" data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Order Summary</h3>
+                        <div class="space-y-3 mb-6">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Subtotal</span>
+                                <span id="cart-subtotal" class="font-bold">₹0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Shipping</span>
+                                <span id="cart-shipping" class="font-bold">₹0</span>
+                            </div>
+                            <div class="flex justify-between hidden">
+                                <span class="text-gray-600">Discount</span>
+                                <span id="cart-discount" class="font-bold text-green-600">-₹0</span>
+                            </div>
+                            <div class="border-t border-gray-300 pt-3 flex justify-between">
+                                <span class="text-lg font-bold text-gray-800">Total</span>
+                                <span id="cart-total" class="text-lg font-bold text-gray-800">₹0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-4 rounded-r-lg">
+                            <p class="text-sm text-gray-700">
+                                <i class="fas fa-info-circle text-green-500 mr-2"></i>
+                                Free shipping on orders over ₹2,000!
+                            </p>
+                        </div>
+                        
+                        <button id="checkout-btn" class="w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 mb-4">
+                            <i class="fas fa-lock mr-2"></i> Proceed to Checkout
+                        </button>
+                        
+                        <a href="marketplace.html" class="block text-center text-green-600 hover:text-green-700 font-medium">
+                            <i class="fas fa-arrow-left mr-2"></i> Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">You May Also <span class="text-gradient">Like</span></h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Products related to items in your cart.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1589923188651-268a9765e432?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Rice Seeds" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Seeds</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.5</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Hybrid Rice Seeds</h3>
+                        <p class="text-gray-600 text-sm mb-3">High-yielding rice variety for paddy cultivation.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹950/kg</span>
+                            <button onclick="addToCart('seed-002', 'Hybrid Rice Seeds', 950)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Irrigation System" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Equipment</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.8</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Drip Irrigation Kit</h3>
+                        <p class="text-gray-600 text-sm mb-3">Water-efficient irrigation system for 1 acre.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹15,000</span>
+                            <button onclick="addToCart('equip-002', 'Drip Irrigation Kit', 15000)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1603816245457-fe9c80b740ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Pesticide" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Pesticide</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.6</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Neem-Based Pesticide</h3>
+                        <p class="text-gray-600 text-sm mb-3">Natural pest control solution for organic farming.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹450/liter</span>
+                            <button onclick="addToCart('pest-001', 'Neem-Based Pesticide', 450)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Corn Seeds" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm text-green-600 font-medium">Seeds</span>
+                            <div class="flex items-center">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm text-gray-600 ml-1">4.6</span>
+                            </div>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Sweet Corn Seeds</h3>
+                        <p class="text-gray-600 text-sm mb-3">High-quality sweet corn variety for cultivation.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-gray-800">₹1,100/kg</span>
+                            <button onclick="addToCart('seed-003', 'Sweet Corn Seeds', 1100)" class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-leaf text-3xl text-green-500 mr-2"></i>
+                        <span class="text-2xl font-bold">AgriTech<span class="text-green-500">Hub</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your complete farming companion with all the tools and resources you need from seed to market.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="features.html" class="text-gray-400 hover:text-white transition duration-300">Features</a></li>
+                        <li><a href="marketplace.html" class="text-gray-400 hover:text-white transition duration-300">Marketplace</a></li>
+                        <li><a href="weather.html" class="text-gray-400 hover:text-white transition duration-300">Weather</a></li>
+                        <li><a href="community.html" class="text-gray-400 hover:text-white transition duration-300">Community</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Crop Library</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Farming Guides</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Market Prices</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Government Schemes</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-300">Expert Advice</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-green-500"></i>
+                            <span class="text-gray-400">123 Farming Road, Agri Valley, New Delhi, India</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-green-500"></i>
+                            <span class="text-gray-400">+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-green-500"></i>
+                            <span class="text-gray-400">info@agritechhub.com</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4">
+                        <h4 class="text-sm font-bold mb-2">Subscribe to our newsletter</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-gray-800">
+                            <button class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-r-lg transition duration-300">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 AgriTech Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script src="main.js"></script>
+    
+    <!-- Cart Page Specific JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize cart display
+            updateCartDisplay();
+            
+            // Handle checkout button
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            if (checkoutBtn) {
+                checkoutBtn.addEventListener('click', function() {
+                    // In a real application, this would redirect to a checkout page
+                    // For demo purposes, we'll just show a notification
+                    showNotification('Proceeding to checkout... This would redirect to a payment gateway in a real application.');
+                    
+                    // Clear cart after checkout
+                    localStorage.removeItem('cart');
+                    updateCartDisplay();
+                    updateCartCount(); // Update the cart count in the header
+                });
+            }
+            
+            // Handle coupon application
+            const couponButton = document.querySelector('.bg-gray-50 button');
+            if (couponButton) {
+                couponButton.addEventListener('click', function() {
+                    const couponInput = this.previousElementSibling;
+                    const couponCode = couponInput.value.trim().toUpperCase();
+                    
+                    // Simple coupon validation
+                    if (couponCode === 'AGRI10') {
+                        showNotification('Coupon applied! 10% discount added.');
+                        localStorage.setItem('coupon', 'AGRI10');
+                        updateCartTotals();
+                    } else if (couponCode === 'FARMER20') {
+                        showNotification('Coupon applied! 20% discount added.');
+                        localStorage.setItem('coupon', 'FARMER20');
+                        updateCartTotals();
+                    } else {
+                        showNotification('Invalid coupon code. Please try again.', 'error');
+                    }
+                    
+                    couponInput.value = '';
+                });
+            }
+        });
+        
+        // Function to update cart display
+        function updateCartDisplay() {
+            const emptyCart = document.getElementById('empty-cart');
+            const cartItems = document.getElementById('cart-items');
+            const cartItemsBody = document.getElementById('cart-items-body');
+            
+            // Get cart from localStorage
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            if (cart.length === 0) {
+                // Show empty cart message
+                emptyCart.classList.remove('hidden');
+                cartItems.classList.add('hidden');
+                
+                // Hide the cart summary section
+                const cartSummary = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.gap-8.mt-12');
+                if (cartSummary) {
+                    cartSummary.classList.add('hidden');
+                }
+            } else {
+                // Show cart items
+                emptyCart.classList.add('hidden');
+                cartItems.classList.remove('hidden');
+                
+                // Show the cart summary section
+                const cartSummary = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-2.gap-8.mt-12');
+                if (cartSummary) {
+                    cartSummary.classList.remove('hidden');
+                }
+                
+                // Clear existing cart items
+                cartItemsBody.innerHTML = '';
+                
+                // Add each cart item to the table
+                cart.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-b border-gray-200';
+                    row.dataset.productId = item.id;
+                    
+                    // Calculate item total
+                    const itemTotal = item.price * item.quantity;
+                    
+                    // Create product image URL (using placeholder images for demo)
+                    const imageUrl = getProductImage(item.id);
+                    
+                    row.innerHTML = `
+                        <td class="py-4 px-4">
+                            <div class="flex items-center">
+                                <img src="${imageUrl}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md mr-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-800">${item.name}</h3>
+                                    <p class="text-sm text-gray-600">Product ID: ${item.id}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="py-4 px-4 text-center">₹${item.price.toLocaleString()}</td>
+                        <td class="py-4 px-4 text-center">
+                            <div class="flex items-center justify-center">
+                                <button class="quantity-btn px-2 py-1 bg-gray-200 rounded-l-md hover:bg-gray-300" data-action="decrease">-</button>
+                                <input type="number" value="${item.quantity}" min="1" class="w-12 text-center border-t border-b border-gray-200 py-1 quantity-input" data-product-id="${item.id}">
+                                <button class="quantity-btn px-2 py-1 bg-gray-200 rounded-r-md hover:bg-gray-300" data-action="increase">+</button>
+                            </div>
+                        </td>
+                        <td class="py-4 px-4 text-center font-bold">₹${itemTotal.toLocaleString()}</td>
+                        <td class="py-4 px-4 text-center">
+                            <button class="text-red-500 hover:text-red-700 remove-item" data-product-id="${item.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    
+                    cartItemsBody.appendChild(row);
+                });
+                
+                // Add event listeners to quantity buttons and remove buttons
+                addCartItemEventListeners();
+            }
+            
+            // Update cart totals
+            updateCartTotals();
+        }
+        
+        // Function to get product image based on product ID
+        function getProductImage(productId) {
+            // In a real application, this would fetch the actual product image
+            // For demo purposes, we'll use placeholder images
+            const placeholderImages = [
+                'https://images.unsplash.com/photo-1620277489752-2f6d7c45c8c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80',
+                'https://images.unsplash.com/photo-1616112205093-6e71d79c5136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80',
+                'https://images.unsplash.com/photo-1598512752271-33f913a5af13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80',
+                'https://images.unsplash.com/photo-1598866594230-a7c12756260f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80',
+                'https://images.unsplash.com/photo-1597916829826-02e5bb4a54e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=80&q=80'
+            ];
+            
+            // Use the product ID to select an image (modulo to stay within array bounds)
+            const imageIndex = parseInt(productId) % placeholderImages.length;
+            return placeholderImages[imageIndex];
+        }
+        
+        // Function to add event listeners to cart item buttons
+        function addCartItemEventListeners() {
+            // Quantity buttons
+            document.querySelectorAll('.quantity-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const input = this.parentElement.querySelector('input');
+                    const productId = input.dataset.productId;
+                    const currentValue = parseInt(input.value);
+                    const action = this.dataset.action;
+                    
+                    if (action === 'increase') {
+                        input.value = currentValue + 1;
+                        updateCartItemQuantity(productId, currentValue + 1);
+                    } else if (action === 'decrease' && currentValue > 1) {
+                        input.value = currentValue - 1;
+                        updateCartItemQuantity(productId, currentValue - 1);
+                    }
+                });
+            });
+            
+            // Quantity input direct changes
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', function() {
+                    const productId = this.dataset.productId;
+                    const newValue = parseInt(this.value);
+                    
+                    if (newValue < 1) {
+                        this.value = 1;
+                        updateCartItemQuantity(productId, 1);
+                    } else {
+                        updateCartItemQuantity(productId, newValue);
+                    }
+                });
+            });
+            
+            // Remove buttons
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = this.dataset.productId;
+                    removeCartItem(productId);
+                });
+            });
+        }
+        
+        // Function to update cart item quantity
+        function updateCartItemQuantity(productId, newQuantity) {
+            // Get cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Find the item and update quantity
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity = newQuantity;
+                
+                // Save updated cart
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                // Update display
+                updateCartDisplay();
+                updateCartCount(); // Update the cart count in the header
+            }
+        }
+        
+        // Function to remove cart item
+        function removeCartItem(productId) {
+            // Get cart from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Remove the item
+            cart = cart.filter(item => item.id !== productId);
+            
+            // Save updated cart
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update display
+            updateCartDisplay();
+            updateCartCount(); // Update the cart count in the header
+            
+            // Show notification
+            showNotification('Item removed from cart');
+        }
+        
+        // Function to update cart totals
+        function updateCartTotals() {
+            const subtotalElement = document.getElementById('cart-subtotal');
+            const discountElement = document.getElementById('cart-discount');
+            const shippingElement = document.getElementById('cart-shipping');
+            const totalElement = document.getElementById('cart-total');
+            
+            if (!subtotalElement || !totalElement) return;
+            
+            // Get cart from localStorage
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Calculate subtotal
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            
+            // Check for coupon discount
+            const coupon = localStorage.getItem('coupon');
+            let discountRate = 0;
+            let discount = 0;
+            
+            if (coupon === 'AGRI10') {
+                discountRate = 0.1; // 10% discount
+            } else if (coupon === 'FARMER20') {
+                discountRate = 0.2; // 20% discount
+            }
+            
+            if (discountRate > 0) {
+                discount = subtotal * discountRate;
+                discountElement.textContent = `-₹${discount.toLocaleString()}`;
+                discountElement.parentElement.classList.remove('hidden');
+            } else {
+                discountElement.parentElement.classList.add('hidden');
+            }
+            
+            // Calculate shipping (free over ₹2000, otherwise ₹150)
+            const shipping = subtotal > 2000 ? 0 : 150;
+            
+            // Calculate total
+            const total = subtotal - discount + shipping;
+            
+            // Update elements
+            subtotalElement.textContent = `₹${subtotal.toLocaleString()}`;
+            shippingElement.textContent = shipping === 0 ? 'Free' : `₹${shipping.toLocaleString()}`;
+            totalElement.textContent = `₹${total.toLocaleString()}`;
+        }
+        
+        // Function to update cart count in the header (copied from main.js)
+        function updateCartCount() {
+            const cartCountElement = document.getElementById('cart-count');
+            const mobileCartCountElement = document.getElementById('mobile-cart-count');
+            
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            if (cartCountElement) {
+                cartCountElement.textContent = itemCount;
+                
+                if (itemCount > 0) {
+                    cartCountElement.classList.remove('hidden');
+                } else {
+                    cartCountElement.classList.add('hidden');
+                }
+            }
+            
+            if (mobileCartCountElement) {
+                mobileCartCountElement.textContent = itemCount;
+                
+                if (itemCount > 0) {
+                    mobileCartCountElement.classList.remove('hidden');
+                } else {
+                    mobileCartCountElement.classList.add('hidden');
+                }
+            }
+        }
+        
+        // Function to show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `fixed bottom-4 right-4 px-4 py-2 rounded-lg shadow-lg z-50 transform transition-transform duration-300 translate-y-20 ${type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-y-20');
+            }, 10);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-y-20');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
